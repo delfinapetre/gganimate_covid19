@@ -1,0 +1,26 @@
+library(readr)
+owid_covid_data <- read_csv("Data_files_csv/owid-covid-data.csv")
+tail(owid_covid_data, n=20)
+
+library(tidyverse)
+owid_covid_data2= owid_covid_data %>%
+  select(date, location, total_deaths, total_cases_per_million, continent) %>%  
+  drop_na() 
+head(owid_covid_data2)
+
+p <- ggplot(airquality,
+  aes(Day, Temp, group = Month, color = factor(Month))) +
+  geom_line() +
+  scale_color_viridis_d() +
+  labs(x = "Day of Month", y = "Temperature") +
+  theme(legend.position = "top")
+p
+
+p + transition_reveal(Day)
+
+#poniendo un punto para cada valor
+
+p + 
+  geom_point(aes(group = seq_along(Day))) +
+  transition_reveal(Day)
+
